@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "author": "Alberto",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-mpu6050", "id": "imu1", "top": 42.22, "left": -247.28, "attrs": {} },
+    { "type": "chip-gps-neo6m", "id": "chip1", "top": 212.22, "left": 177.6, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -118.8,
+      "left": 109.4,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 263.15,
+      "left": 326.4,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "imu1:VCC", "esp:3V3", "red", [ "v-86.4", "h115.13" ] ],
+    [ "imu1:GND", "esp:GND.2", "black", [ "v-124.8", "h268.88" ] ],
+    [ "imu1:SDA", "esp:21", "green", [ "v153.6", "h268.88", "v-153.6" ] ],
+    [ "imu1:SCL", "esp:22", "green", [ "v172.8", "h249.68", "v-201.6", "h-9.6" ] ],
+    [ "chip1:VCC", "esp:5V", "red", [ "h-57.6", "v153.6", "h-134.4", "v-57.6" ] ],
+    [
+      "chip1:GND",
+      "esp:GND.2",
+      "black",
+      [ "h-38.4", "v153.6", "h-163.2", "v-297.6", "h144", "v57.6" ]
+    ],
+    [ "esp:17", "chip1:RX", "green", [ "h0" ] ],
+    [ "chip1:TX", "esp:16", "green", [ "h30.61", "v28.8" ] ],
+    [ "led1:A", "r1:1", "green", [] ],
+    [ "r1:2", "esp:4", "green", [] ],
+    [ "led1:C", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}
